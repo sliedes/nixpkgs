@@ -15,7 +15,10 @@
   openmp ? null,
 }:
 
-stdenv.mkDerivation rec {
+let
+  stdenv' = if enableCuda then cudaPackages.backendStdenv else stdenv;
+in
+stdenv'.mkDerivation rec {
   pname = "suitesparse";
   version = "5.13.0";
 
